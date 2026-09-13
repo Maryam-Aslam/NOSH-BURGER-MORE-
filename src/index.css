@@ -1,0 +1,154 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-display: 'Outfit', sans-serif;
+    --font-sans: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: #070709;
+    color: #FAF6EE;
+  }
+
+  body {
+    background-color: #070709;
+    color: #FAF6EE;
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #09090c;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #23232b;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #ff5500;
+  }
+}
+
+/* Subtle Film Grain Overlay */
+.bg-grain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 999;
+  background-image: url('/grain.svg');
+  background-repeat: repeat;
+  opacity: 0.7;
+}
+
+/* Typography styles */
+.font-display {
+  font-family: var(--font-display);
+}
+
+.text-stroke-subtle {
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.15);
+}
+
+.text-stroke-orange {
+  -webkit-text-stroke: 1.5px rgba(255, 85, 0, 0.4);
+}
+
+/* Glassmorphism utilities */
+.glass-panel {
+  background: rgba(18, 18, 24, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-pill {
+  background: rgba(14, 14, 18, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Dramatic radial light */
+.hero-ambient-glow {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 85, 0, 0.22) 0%, rgba(255, 174, 0, 0.09) 45%, transparent 70%);
+  filter: blur(60px);
+  pointer-events: none;
+}
+
+/* Smooth marquee infinite track */
+@keyframes marquee-track {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-marquee-infinite {
+  display: flex;
+  width: max-content;
+  animation: marquee-track 30s linear infinite;
+}
+
+.animate-marquee-infinite:hover {
+  animation-play-state: paused;
+}
+
+/* Hide scrollbar for carousel drag – cross-browser */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;             /* Chrome, Safari, Opera */
+}
+
+/* Pulse glow animation for map pin etc */
+@keyframes pulse-glow-anim {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.08);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow-anim 2.5s ease-in-out infinite;
+}
+
+/* Safe area padding for mobile sticky bottom bar */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee-infinite,
+  .animate-pulse-glow,
+  [class*="animate-float"] {
+    animation: none !important;
+    transition: none !important;
+  }
+}
