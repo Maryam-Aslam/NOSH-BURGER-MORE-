@@ -1,6 +1,6 @@
 import React from 'react';
 import { Flame, Phone, MapPin, Clock, Heart } from 'lucide-react';
-import { siteConfig } from '../data/siteConfig';
+
 
 export const Footer: React.FC = () => {
   return (

@@ -44,7 +44,7 @@ export const ComboSection: React.FC<ComboSectionProps> = ({ onAddToCart }) => {
       id: `combo-${Date.now()}`,
       name: `COMBO: ${selectedBurger.name} + ${selectedSide.name}`,
       price: comboPrice,
-      category: 'Burgers',
+      category: 'BURGERS',
       image: selectedBurger.image,
       description: `Custom Combo includes ${selectedBurger.name}, ${selectedSide.name}, and ${selectedDrink.name}.`,
       badge: 'SAVER COMBO',
