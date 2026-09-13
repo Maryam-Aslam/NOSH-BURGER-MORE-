@@ -28,7 +28,7 @@ import type { MenuItem, MenuCategory } from '../data/menuData';
 export const HomePage: React.FC = () => {
   const [cartItems, setCartItems] = useState<CartItem[]>([
     {
-      item: menuItems[0], // NOSH SMASH (Rs. 680) initially in bag
+      item: menuItems[0],
       quantity: 1,
     },
   ]);
@@ -43,17 +43,17 @@ export const HomePage: React.FC = () => {
   ]);
   const [flyingItems, setFlyingItems] = useState<FlyingItem[]>([]);
 
-  // Total cart count
   const cartCount = cartItems.reduce((acc, curr) => acc + curr.quantity, 0);
 
-  const triggerConfetti = () => {
+  const triggerConfetti = useCallback(() => {
     confetti({
-      particleCount: 80,
-      spread: 65,
+      particleCount: 60,
+      spread: 60,
       origin: { y: 0.8 },
       colors: ['#FF5500', '#FFAE00', '#FFFFFF', '#FFC837'],
+      disableForReducedMotion: true,
     });
-  };
+  }, []);
 
   const triggerFlyAnimation = useCallback((item: MenuItem) => {
     const flyId = `fly-${Date.now()}-${Math.random()}`;
@@ -81,7 +81,7 @@ export const HomePage: React.FC = () => {
     triggerConfetti();
 
     setTimeout(() => setIsCartOpen(true), 600);
-  }, [triggerFlyAnimation]);
+  }, [triggerFlyAnimation, triggerConfetti]);
 
   const handleQuickView = (item: MenuItem) => {
     setQuickViewItem(item);
@@ -131,42 +131,28 @@ export const HomePage: React.FC = () => {
 
   return (
     <div className="relative min-h-screen bg-nosh-black text-nosh-cream flex flex-col w-full overflow-x-hidden">
-      {/* Subtle Grain Overlay */}
       <div className="bg-grain" />
 
-      {/* Sticky Navbar */}
       <Navbar
         cartCount={cartCount}
         onOpenCart={() => setIsCartOpen(true)}
         onOrderClick={handleOrderClick}
       />
 
-      {/* Main Content */}
       <main className="flex-1 w-full" id="home">
-        {/* 1. Full-screen Hero */}
         <Hero
           onOrderClick={handleOrderClick}
           onExploreMenu={handleExploreMenu}
         />
-
-        {/* 2. Marquee Ticker */}
         <Marquee />
-
-        {/* 3. Late-Night Section (Swapped to 3rd position) */}
         <LateNightSection onOrderClick={handleOrderClick} />
-
-        {/* 4. Signature Burger Editorial Section (Swapped to 4th position) */}
         <SignatureBurger onAddToCart={(item) => handleAddToCart(item, 1)} />
-
-        {/* 5. Trending / Popular Carousel */}
         <TrendingCarousel
           onAddToCart={(item) => handleAddToCart(item, 1)}
           onQuickView={handleQuickView}
           favorites={favorites}
           onToggleFavorite={handleToggleFavorite}
         />
-
-        {/* 6. Complete Menu Section */}
         <MenuSection
           selectedCategory={selectedCategory}
           onCategoryChange={setSelectedCategory}
@@ -175,33 +161,17 @@ export const HomePage: React.FC = () => {
           favorites={favorites}
           onToggleFavorite={handleToggleFavorite}
         />
-
-        {/* 7. Combo Section */}
         <ComboSection onAddToCart={handleAddToCart} />
-
-        {/* 8. Quality Guarantee */}
         <QualityGuarantee />
-
-        {/* 9. Interactive Sauce Lab */}
         <SauceLab />
-
-        {/* 10. Customer Reviews */}
         <CustomerSection />
-
-        {/* 11. FAQ Section */}
         <FAQSection />
-
-        {/* 12. Contact & Location */}
         <ContactSection onOrderClick={handleOrderClick} />
-
-        {/* 13. Final CTA */}
         <FinalCTA onOrderClick={handleOrderClick} />
       </main>
 
-      {/* Footer */}
       <Footer />
 
-      {/* Drawers & Modals */}
       <CartDrawer
         isOpen={isCartOpen}
         onClose={() => setIsCartOpen(false)}
@@ -220,7 +190,6 @@ export const HomePage: React.FC = () => {
 
       <FlyToCartOverlay flyingItems={flyingItems} />
 
-      {/* Mobile Bottom Order CTA */}
       <AnimatePresence>
         {!isCartOpen && !isQuickViewOpen && (
           <motion.div

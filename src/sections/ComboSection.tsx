@@ -35,18 +35,18 @@ export const ComboSection: React.FC<ComboSectionProps> = ({ onAddToCart }) => {
   const [selectedSide, setSelectedSide] = useState<ComboOption>(SIDES[0]);
   const [selectedDrink, setSelectedDrink] = useState<ComboOption>(DRINKS[0]);
 
-  // Calculate total combo price with a 15% discount for combo build
+  // Calculate total combo price with a 15% discount
   const rawTotal = selectedBurger.price + selectedSide.price + selectedDrink.price;
   const comboPrice = Math.round(rawTotal * 0.85);
 
   const handleAddComboToCart = () => {
     const customComboItem: MenuItem = {
       id: `combo-${Date.now()}`,
-      name: `COMBO: ${selectedBurger.name} + ${selectedSide.name}`,
+      name: `COMBO: ${selectedBurger.name} + ${selectedSide.name} + ${selectedDrink.name}`,
       price: comboPrice,
-      category: 'BURGERS',
+      category: 'burgers',
       image: selectedBurger.image,
-      description: `Custom Combo includes ${selectedBurger.name}, ${selectedSide.name}, and ${selectedDrink.name}.`,
+      description: `Custom Combo Box: Includes ${selectedBurger.name}, ${selectedSide.name}, and ${selectedDrink.name}.`,
       badge: 'SAVER COMBO',
     };
 
@@ -62,14 +62,14 @@ export const ComboSection: React.FC<ComboSectionProps> = ({ onAddToCart }) => {
         <div>
           <div className="flex items-center gap-2 text-nosh-orange text-xs font-black uppercase tracking-widest mb-2">
             <Sparkles className="w-4 h-4" />
-            <span>BUILD & SAVE 15%</span>
+            <span>BUILD &amp; SAVE 15%</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-black text-nosh-cream uppercase tracking-tight">
             THE NOSH COMBO BOX
           </h2>
         </div>
-        
-        {/* Social Share / Instagram Icon Replacement */}
+
+        {/* Social Share Tag */}
         <div className="flex items-center gap-2 text-nosh-cream-muted text-xs font-bold">
           <span>TAG US YOUR COMBO</span>
           <svg
@@ -91,7 +91,7 @@ export const ComboSection: React.FC<ComboSectionProps> = ({ onAddToCart }) => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
         {/* Step Selection Grid */}
         <div className="lg:col-span-2 space-y-8">
-          {/* Step 1: Burger */}
+          {/* Step 1: Main Burger */}
           <div>
             <h3 className="text-sm font-black text-nosh-amber uppercase tracking-wider mb-3">
               1. CHOOSE YOUR MAIN
@@ -173,7 +173,7 @@ export const ComboSection: React.FC<ComboSectionProps> = ({ onAddToCart }) => {
           </div>
         </div>
 
-        {/* Combo Summary Box */}
+        {/* Combo Summary Sidebar */}
         <div className="bg-white/5 border border-white/10 rounded-3xl p-6 sticky top-24">
           <h3 className="text-lg font-black text-nosh-cream uppercase mb-4 flex items-center gap-2">
             <ShoppingBag className="w-5 h-5 text-nosh-orange" />
@@ -209,7 +209,7 @@ export const ComboSection: React.FC<ComboSectionProps> = ({ onAddToCart }) => {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={handleAddComboToCart}
-            className="w-full py-4 rounded-2xl bg-gradient-to-r from-nosh-orange to-nosh-amber text-nosh-black font-black text-sm uppercase tracking-wider flex items-center justify-center gap-2 shadow-glow-orange"
+            className="w-full py-4 rounded-2xl bg-gradient-to-r from-nosh-orange to-nosh-amber text-nosh-black font-black text-sm uppercase tracking-wider flex items-center justify-center gap-2 shadow-glow-orange cursor-pointer"
           >
             <Plus className="w-4 h-4" />
             <span>ADD COMBO TO BAG</span>
