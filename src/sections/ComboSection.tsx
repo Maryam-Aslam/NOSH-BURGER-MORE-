@@ -35,7 +35,7 @@ export const ComboSection: React.FC<ComboSectionProps> = ({ onAddToCart }) => {
   const [selectedSide, setSelectedSide] = useState<ComboOption>(SIDES[0]);
   const [selectedDrink, setSelectedDrink] = useState<ComboOption>(DRINKS[0]);
 
-  // Calculate total combo price with a 15% discount
+  // Calculate total combo price with a 15% discount for combo build
   const rawTotal = selectedBurger.price + selectedSide.price + selectedDrink.price;
   const comboPrice = Math.round(rawTotal * 0.85);
 
@@ -44,10 +44,10 @@ export const ComboSection: React.FC<ComboSectionProps> = ({ onAddToCart }) => {
       id: `combo-${Date.now()}`,
       name: `COMBO: ${selectedBurger.name} + ${selectedSide.name} + ${selectedDrink.name}`,
       price: comboPrice,
-      category: 'burgers',
+      category: 'SMASH BURGERS',
       image: selectedBurger.image,
-      description: `Custom Combo Box: Includes ${selectedBurger.name}, ${selectedSide.name}, and ${selectedDrink.name}.`,
-      badge: 'SAVER COMBO',
+      description: `Custom Combo includes ${selectedBurger.name}, ${selectedSide.name}, and ${selectedDrink.name}.`,
+      tag: 'SAVER COMBO',
     };
 
     if (onAddToCart) {
@@ -91,7 +91,7 @@ export const ComboSection: React.FC<ComboSectionProps> = ({ onAddToCart }) => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
         {/* Step Selection Grid */}
         <div className="lg:col-span-2 space-y-8">
-          {/* Step 1: Main Burger */}
+          {/* Step 1: Burger */}
           <div>
             <h3 className="text-sm font-black text-nosh-amber uppercase tracking-wider mb-3">
               1. CHOOSE YOUR MAIN
@@ -173,7 +173,7 @@ export const ComboSection: React.FC<ComboSectionProps> = ({ onAddToCart }) => {
           </div>
         </div>
 
-        {/* Combo Summary Sidebar */}
+        {/* Combo Summary Box */}
         <div className="bg-white/5 border border-white/10 rounded-3xl p-6 sticky top-24">
           <h3 className="text-lg font-black text-nosh-cream uppercase mb-4 flex items-center gap-2">
             <ShoppingBag className="w-5 h-5 text-nosh-orange" />
